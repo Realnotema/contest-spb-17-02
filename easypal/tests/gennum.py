@@ -12,21 +12,26 @@ def genpal():
     if isNum == 1:
         isMin = random.randint(0, 1)
         if isMin == 1:
+            print(False)
             answer = '-' + answer
             return answer
         else:
+            print(True)
             return answer
     else:
         return answer
 
-def gennum(file, filename):
+def gennum(filename):
     ans_filename = filename + '.a'
     ans_file = open(ans_filename, 'w')
-    isPal = random.randint(0, 1)
-    if isPal == 1:
-        ans_file.write("True")
-        print("True")
-        return genpal()
+    isPal = random.randint(0, 10)
+    if isPal < 7:
+        ans = genpal()
+        if ans[0] == '-':
+            ans_file.write("False")
+        else: 
+            ans_file.write("True")
+        return ans
     else: 
         ans_file.write("False")
         print("False")
@@ -36,7 +41,7 @@ def gennum(file, filename):
 filename = '00'
 for i in range(100):
     file = open(filename, 'w')
-    file.write(gennum(file, filename))
+    file.write(gennum(filename))
     filename = str(int(filename) + 1)
     if int(filename) < 10:
         filename = '0' + filename
